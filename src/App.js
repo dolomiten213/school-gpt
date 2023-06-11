@@ -4,17 +4,25 @@ import SignUp from './components/SignUp';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import PrivateRoutes from './components/PrivateRoute';
 import Chat from './components/Chat';
+import useToken from './hooks/useToken';
+import PublicRoutes from './components/PublicRoute';
 
 function App() {
+
+  const { token } = useToken();
 
   return (
     <Router>
         <Routes>
           <Route element={<PrivateRoutes/>}>
-              <Route path='/chat' element={<Chat/>} />
+            <Route path='/' element={<Chat/>} />
           </Route>
-          <Route path='/login' element={<SignIn/>}/>
-          <Route path='/sign-up' element={<SignUp/>}/>
+          <Route element={<PublicRoutes/>}>
+            <Route path='/sign-up' element={<SignUp/>}/>
+          </Route>
+          <Route element={<PublicRoutes/>}>
+            <Route path='/login' element={<SignIn/>}/>
+          </Route>     
         </Routes>
     </Router>
   );

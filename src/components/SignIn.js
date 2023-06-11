@@ -9,34 +9,24 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Cookies from 'universal-cookie';
-import axios from 'axios';
+import useToken from '../hooks/useToken';
+import { Navigate } from 'react-router';
 
 
 export default function SignIn() {
+  
+  const { token, setToken } = useToken();
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
-    try {
-      const resp = await axios.get(
-        "http://192.168.15.179:6001/api/v1/gpt/"
-      )
-      const token = resp.data
-      console.log(token)
-      const cookies = new Cookies();
-      cookies.set("jwt", token);
-    }
-    catch(err) {
-      console.log(err)
-    }
-
-
+    setToken(data)
   };
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
+      {token ? <Navigate to='/'/> :
       <Box
         sx={{
           marginTop: 8,
@@ -88,7 +78,7 @@ export default function SignIn() {
             </Grid>
           </Grid>
         </Box>
-      </Box>
+      </Box>}
     </Container>
   );
 }
