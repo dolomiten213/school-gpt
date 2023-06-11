@@ -13,7 +13,7 @@ import useToken from '../hooks/useToken';
 import { Navigate } from 'react-router';
 
 
-export default function SignIn() {
+export default function Login() {
   
   const { token, setToken } = useToken();
   

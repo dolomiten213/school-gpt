@@ -1,5 +1,5 @@
 
-import SignIn from './components/SignIn';
+import Login from './components/Login';
 import SignUp from './components/SignUp';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import PrivateRoutes from './components/PrivateRoute';
@@ -21,7 +21,7 @@ function App() {
             <Route path='/sign-up' element={<SignUp/>}/>
           </Route>
           <Route element={<PublicRoutes/>}>
-            <Route path='/login' element={<SignIn/>}/>
+            <Route path='/login' element={<Login/>}/>
           </Route>     
         </Routes>
     </Router>
